@@ -15,6 +15,15 @@ int main(void)
 {
     int valueInput = 123;
     int valueOutput = 0;
+    int *pointerInput = &valueInput;
+    int *pointerOutput = &valueOutput;
+
+    cout << "vIn = " << valueInput << ", &vIn = " << &valueInput << endl;
+    cout << "pIn = " << pointerInput << ", *pIn = " << *pointerInput << ", &pIn = " << &pointerInput << endl;
+
+    cout << "vOut = " << valueOutput << ", &vOut = " << &valueOutput << endl;
+    cout << "pOut = " << pointerOutput << ", *pOut = " << *pointerOutput << ", &pOut = " << &pointerOutput << endl;
+
     consoleValue(valueInput, valueOutput, "initial state");
 
     // call by Value
