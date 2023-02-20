@@ -8,10 +8,12 @@ using namespace std;
 struct StudentData
 {
     string name;
-    int number;
+    int number, scoreMath, scoreEnglish;
 };
-void conosleStudent(StudentData);
+
+void conosleStudent(struct StudentData);
 void conosleDivider();
+void changeNumber(struct StudentData *, int);
 
 // implements
 void conosleDivider()
@@ -19,20 +21,32 @@ void conosleDivider()
     cout << " - - - - - - - - - - - - - - - - - - - - " << endl;
 }
 
-void consoleStudent(StudentData data)
+void consoleStudent(struct StudentData data)
 {
     cout << "student:" << endl;
     cout << " name: " << data.name << ",";
     cout << " number: " << data.number << endl;
+    cout << "size of StudentData: " << sizeof(data) << endl;
+}
+
+void changeNumber(struct StudentData *data, int newNumber)
+{
+    data->number = newNumber;
 }
 
 // main
 int main(void)
 {
-    struct StudentData student = {"Lily Chen", 25};
+    struct StudentData student1 = {"Lily Chen", 25, 80, 66};
     struct StudentData student2 = {"Mike Wang", 19};
 
-    consoleStudent(student);
+    consoleStudent(student1);
+    consoleStudent(student2);
+    conosleDivider();
+
+    changeNumber(&student1, 98);
+    changeNumber(&student2, 109);
+    consoleStudent(student1);
     consoleStudent(student2);
     conosleDivider();
 
