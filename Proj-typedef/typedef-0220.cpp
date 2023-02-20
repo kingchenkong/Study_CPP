@@ -40,6 +40,7 @@ void consoleDivider()
 {
     cout << " - - - - - - - - - - - - - - - - - - - - " << endl;
 }
+
 void consoleTime(int h, int m, int s)
 {
     cout << "hour: " << h << endl;
