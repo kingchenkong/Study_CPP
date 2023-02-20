@@ -23,6 +23,13 @@ public:
             cout << "Rectangle construct fail." << endl;
         }
     }
+    Rectangle(int w, int h)
+    {
+        if (!this->setter('Z', w, h))
+        {
+            cout << "'Z', Rectangle construct fail." << endl;
+        }
+    }
     // getter
     char getId()
     {
@@ -84,9 +91,14 @@ void consoleDivider();
 // main
 int main(void)
 {
+    // normal construct
     Rectangle rec1('A', 20, 13);
     // rec1.setter('A', 20, 17);
     rec1.consoleRecAttr();
+    consoleDivider();
+    // construct class by 'new', and use pointer
+    Rectangle *rec2 = new Rectangle(6, 7);
+    rec2->consoleRecAttr();
     consoleDivider();
 
     consoleDivider();
