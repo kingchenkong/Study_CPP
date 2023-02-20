@@ -6,12 +6,23 @@ using namespace std;
 // declarations
 class Rectangle
 {
-private:
+    // private: // default is private.
     char id;
     int width;
     int height;
+    // private memeber function
+    int area();
+    int perimeter();
 
 public:
+    // constructor
+    Rectangle(char id, int w, int h)
+    {
+        if (!this->setter(id, w, h))
+        {
+            cout << "Rectangle construct fail." << endl;
+        }
+    }
     // getter
     char getId()
     {
@@ -32,25 +43,27 @@ public:
         return this->height;
     }
     // setter
-    void setId(char id)
-    {
-        this->id = id;
-    }
-    void setWidth(int width)
-    {
-        this->width = width;
-    }
-    void setHeight(int height)
-    {
-        this->height = height;
-    }
-    // member function
-    int area();
-    int perimeter();
+    bool setter(char, int, int);
+    // public member function
     void consoleRecAttr();
 };
 
 // pulic method, in Rectangle
+bool Rectangle::setter(char id, int w, int h)
+{
+    this->id = id;
+    if (w > 0 && h > 0)
+    {
+        this->width = w;
+        this->height = h;
+        return true; // success.
+    }
+    else
+    {
+        cout << "Input error: width = " << w << ", height = " << h << endl;
+        return false; // fail.
+    }
+}
 int Rectangle::area()
 {
     return width * height;
@@ -71,10 +84,8 @@ void consoleDivider();
 // main
 int main(void)
 {
-    Rectangle rec1;
-    rec1.setId('A');
-    rec1.setWidth(20);
-    rec1.setHeight(13);
+    Rectangle rec1('A', 20, 13);
+    // rec1.setter('A', 20, 17);
     rec1.consoleRecAttr();
     consoleDivider();
 
