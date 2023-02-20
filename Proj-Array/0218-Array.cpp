@@ -11,40 +11,81 @@ void consoleDivider();
 void consoleArraySize(int *);
 void consoleArrayElements(int *);
 int getArrayLength(int *);
-
 int getVectorLength(vector<int>);
+void consoleElements(int *, int len);
 
 int main(void)
 {
-    int intArr[10] = {109, 202, 303, 404, 505, 606, 707, 808, 909, 1000};
-    // cout << "intArr:                " << endl;
-    // cout << "size of address:       " << sizeof(&intArr) << endl;
-    // cout << "intArr[0]:             " << intArr[0] << endl;
-    // cout << "memory size of int:    " << sizeof(int) << endl;
-    // cout << "memory size of array:  " << sizeof(intArr) << endl;
-    // cout << "lenght of array:       " << sizeof(intArr) / sizeof(intArr[0]) << endl;
-    // cout << "lenght2 of array:      " << *(&intArr + 1) - intArr << endl;
-    // cout << "lenght3 of array:      " << &intArr[10] - intArr << endl;
-    // consoleDivider();
-    // cout << "intArr address:            " << intArr << endl;
-    // cout << "next address: (&array + 1) " << (&intArr + 1) << endl;
-    // cout << "intArr[10] address:        " << &intArr[10] << endl;
-
+    int arrLen = 10;
+    int intArr[arrLen] = {109, 202, 303, 404, 505, 606, 707, 808, 909, 1000};
+    cout << "intArr:                " << endl;
+    cout << "size of address:       " << sizeof(&intArr) << endl;
+    cout << "intArr[0]:             " << intArr[0] << endl;
+    cout << "memory size of int:    " << sizeof(int) << endl;
+    cout << "memory size of array:  " << sizeof(intArr) << endl;
+    cout << "lenght of array:       " << sizeof(intArr) / sizeof(intArr[0]) << endl;
+    cout << "lenght2 of array:      " << *(&intArr + 1) - intArr << endl;
+    cout << "lenght3 of array:      " << &intArr[10] - intArr << endl;
     consoleDivider();
-    // consoleArraySize(array1);
+
+    cout << "intArr address:            " << intArr << endl;
+    cout << "next address: (&array + 1) " << (&intArr + 1) << endl;
+    cout << "intArr[10] address:        " << &intArr[10] << endl;
+    consoleDivider();
+
+    consoleArraySize(intArr);
+    consoleDivider();
 
     int arrayLen = getArrayLength(intArr);
+    consoleDivider();
+
+    consoleElements(intArr, arrLen);
     consoleDivider();
 
     vector<int> vec1 = {1, 23, 345, 6789, 11, 2323, 345345};
     cout << "vec len: " << vec1.size() << endl;
     cout << "vec len: " << getVectorLength(vec1) << endl;
+    consoleDivider();
 
     system("pause");
     return 0;
 }
 
 // function implements
+void consoleElements(int *arr, int len)
+{
+    functionNameLog("consoleElements");
+
+    cout << " #### first part #### " << endl;
+    for (size_t i = 0; i <= len; i++)
+    {
+
+        cout << "arr[ " << i << "] = " << arr[i];
+        if (i < len)
+        {
+            cout << endl;
+        }
+        else
+        {
+            cout << ", here 'element' is not in arr elements." << endl;
+        }
+    }
+
+    cout << " #### seconde part #### " << endl;
+    for (size_t i = 0; i <= len; i++)
+    {
+        cout << "arr[ " << i << " ] = " << *(arr + i);
+        if (i < len)
+        {
+            cout << endl;
+        }
+        else
+        {
+            cout << ", here 'element' is not in arr elements." << endl;
+        }
+    }
+    return;
+}
 
 int getVectorLength(vector<int> vec)
 {
