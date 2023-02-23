@@ -4,22 +4,33 @@
 using namespace std;
 
 // declaration: class
+// - abstract
+class Shape
+{
+public:
+    Shape() { cout << "Shape constructor(), do nothing..." << endl; }
+    virtual ~Shape() { cout << "~Shape() destructor, is called.." << endl; }
+    virtual int area() = 0;
+    // virtual int area() = NULL;  // badly-formed pure specifier (only '= 0' is allowed)
+    virtual void showArea() { cout << "Shape, area= " << area() << endl; }
+};
+
 // - super
-class Window
+class Window : public Shape
 {
 protected:
     string name;
     int width, height;
 
 public:
-    Window(string n, int w, int h) : name(n), width(w), height(h) { cout << " Window(n, w, h), is called.." << endl; }
+    Window(string n, int w, int h) : name(n), width(w), height(h) { cout << "  |--Window(n, w, h), is called.." << endl; }
     ~Window()
     {
-        cout << "~Window(), " << endl;
+        cout << " ~Window(), " << endl;
         showMember();
     }
     void showMember() { cout << "Window, \"" << name << "\", w: " << width << ", h: " << height << endl; }
-    void showArea() { cout << "Window, \"" << name << "\", area= " << area() << endl; }
+    virtual void showArea() { cout << "Window, \"" << name << "\", area= " << area() << endl; }
     virtual int area()
     {
         cout << "Window->area(): ";
@@ -42,13 +53,13 @@ void Window::showAddress(Window *ptr) { cout << "address: " << &ptr << endl; }
 class ChildWindow : public Window
 {
 public:
-    ChildWindow(string n, int w, int h) : Window(n, w, h) { cout << " ChildWindow(n, w, h), is called.." << endl; }
+    ChildWindow(string n, int w, int h) : Window(n, w, h) { cout << "    |--ChildWindow(n, w, h), is called.." << endl; }
     ~ChildWindow()
     {
-        cout << "~ChildWindow(), " << endl;
+        cout << "  ~ChildWindow(), " << endl;
         showMember();
     }
-    int area()
+    virtual int area()
     {
         cout << "ChildWindow->area(): ";
         return Window::area() * 0.8;
@@ -71,6 +82,7 @@ void destroy();
 Window *ptrWindow1 = NULL;
 ChildWindow *ptrChildWindow1 = NULL;
 Window *ptrContainerWindow = NULL;
+Shape *ptrShape = NULL;
 
 // main
 int main()
@@ -93,16 +105,29 @@ int main()
     ptrContainerWindow = new Window(n3, 7, 8);
     ptrContainerWindow->showMember();
     ptrContainerWindow->showArea();
-    Window::showAddress(ptrContainerWindow);
-    Window::destroy(ptrContainerWindow);
-    Window::showAddress(ptrContainerWindow);
+    // is here need to => delete, and set NULL?
+    // Window::showAddress(ptrContainerWindow);
+    // Window::destroy(ptrContainerWindow);
+    // Window::showAddress(ptrContainerWindow);
     cout << "#### " << n3 << ", pointer ChildWindow." << endl;
     ptrContainerWindow = new ChildWindow(n3, 9, 10);
     ptrContainerWindow->showMember();
     ptrContainerWindow->showArea();
-    Window::showAddress(ptrContainerWindow);
-    ChildWindow::destroy((ChildWindow *)ptrContainerWindow);
-    Window::showAddress(ptrContainerWindow);
+    // is here need to => delete, and set NULL?
+    // Window::showAddress(ptrContainerWindow);
+    // ChildWindow::destroy((ChildWindow *)ptrContainerWindow);
+    // Window::showAddress(ptrContainerWindow);
+    consoleDivider();
+
+    string n4 = "ptrShape";
+    cout << "#### " << n4 << ", pointer: Window." << endl;
+    ptrShape = new Window(n4, 10, 20);
+    ((Window *)ptrShape)->showArea();
+    Window::destroy((Window *)ptrShape);
+    cout << "#### " << n4 << ", pointer: ChildWindow." << endl;
+    ptrShape = new ChildWindow(n4, 20, 30);
+    ptrShape->showArea();
+    ChildWindow::destroy((ChildWindow *)ptrShape);
     consoleDivider();
 
     cout << "#### end - destroy ####" << endl;
