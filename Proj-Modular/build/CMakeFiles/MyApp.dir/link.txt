@@ -1,0 +1,1 @@
+/usr/bin/c++ CMakeFiles/MyApp.dir/main.cpp.o CMakeFiles/MyApp.dir/function.cpp.o -o MyApp 
